@@ -115,9 +115,18 @@ class AGMOHD(Optimizer):
             use_rtx_optimizations=False  # Disable RTX for compatibility
         )
 
+        # Initialize state for transformers compatibility
+        self._init_transformers_state()
+
         # Training state
         self.step_count = 0
         self.loss_history = []
+
+    def _init_transformers_state(self):
+        """Initialize state for transformers compatibility."""
+        # Ensure compatibility with transformers training patterns
+        self._dummy_param = None  # For transformers compatibility
+        self._last_lr = self.defaults["lr"]
 
     @torch.no_grad()
     def step(self, closure=None):
