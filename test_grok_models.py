@@ -311,6 +311,28 @@ def run_grok_model_tests():
 
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
+    # GPU Setup and Detection
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    print(f"🖥️ Using device: {device}")
+
+    if torch.cuda.is_available():
+        gpu_name = torch.cuda.get_device_name(0)
+        gpu_memory = torch.cuda.get_device_properties(0).total_memory / (1024**3)
+        print(f"🎮 GPU: {gpu_name}")
+        print(".1f")
+        print("✅ CUDA available - enabling GPU optimizations")
+
+        # Enable RTX optimizations if available
+        if torch.cuda.get_device_capability(0)[0] >= 7:  # RTX series
+            torch.backends.cuda.matmul.allow_tf32 = True
+            torch.backends.cudnn.allow_tf32 = True
+            torch.backends.cudnn.benchmark = True
+            print("🚀 RTX optimizations enabled")
+        else:
+            print("ℹ️ Standard GPU detected - basic CUDA optimizations enabled")
+    else:
+        print("⚠️ CUDA not available - running on CPU")
+
     # Define challenging models to test
     grok_models = [
         # Large language models that are typically hard to optimize
@@ -327,9 +349,6 @@ def run_grok_model_tests():
     optimizers_to_test = ['AGMOHD', 'AdamW', 'Adam']
 
     results = {}
-
-    device = 'cuda' if torch.cuda.is_available() else 'cpu'
-    print(f"Using device: {device}")
 
     for model_name in demo_models:
         print(f"\n🔬 Testing model: {model_name}")

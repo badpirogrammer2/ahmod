@@ -112,7 +112,7 @@ class AGMOHD(Optimizer):
 
         self.gradient_processor = GradientProcessor(
             clipping_method=gradient_clipping,
-            use_rtx_optimizations=False  # Disable RTX for compatibility
+            use_rtx_optimizations=True  # Enable RTX optimizations
         )
 
         # Initialize state for transformers compatibility
