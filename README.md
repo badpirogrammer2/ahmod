@@ -2,7 +2,7 @@
 
 ## 🎯 **Project Overview**
 
-AGMOHD (Adaptive Gradient Momentum with Hindrance Detection) is a revolutionary optimizer that adapts to training dynamics through intelligent hindrance detection and adaptive momentum control. This project provides a complete framework for integrating AGMOHD into the Hugging Face Transformers ecosystem.
+AGMOHD (Adaptive Gradient Momentum with Hindrance Detection) is a revolutionary **optimizer** that adapts to training dynamics through intelligent hindrance detection and adaptive momentum control. This project provides a complete framework for integrating AGMOHD into the Hugging Face Transformers ecosystem.
 
 ## 📁 **Project Structure**
 
